@@ -1,0 +1,80 @@
+import random
+import time
+
+game = input("Would you like to play a game? (Y/N)")
+
+while game == "N":
+    game  = input("C'mon, please? (Y/N)")
+
+while game == "Y":
+    print("Welcome to the number guessing game!")
+    print("I'm thinking of a number between 1-100")
+
+    difficulty = input("Select the difficulty: "
+                       "1. Easy = 10 guesses "
+                       "2. Normal = 5 guesses "
+                       "3. Hard = 3 guesses")
+    while difficulty not in ["1", "2", "3"]:
+        print("That is not valid input")
+        difficulty = input("Select the difficulty: "
+                           "1. Easy = 10 guesses "
+                           "2. Normal = 5 guesses "
+                           "3. Hard = 3 guesses")
+
+    time_beat_start = time.perf_counter()
+
+    number = random.randint(1, 100)
+    if difficulty == "2":
+        for guess in range(1, 5):
+            guess_1 = float(input(f"Enter guess {guess}:"))
+            if guess_1 == number:
+                time_beat_end = time.perf_counter()
+                time_beat = time_beat_end - time_beat_start
+                print(f"Congratulations, you are CORRECT! The number was {number}. It took you {guess} guesses and {time_beat:.2f} seconds to enter the correct answer.")
+                quit()
+            if guess_1 > number:
+                print("Too high! Guess again:")
+            if guess_1 < number:
+                print("Too low! Guess again:")
+    if difficulty == "3":
+        for guess in range(1, 3):
+            guess_1 = float(input(f"Enter guess {guess}:"))
+            if guess_1 == number:
+                time_beat_end = time.perf_counter()
+                time_beat = time_beat_end - time_beat_start
+                print(f"Congratulations, you are CORRECT! The number was {number}.It took you {guess} guesses and {time_beat:.2f} seconds to enter the correct answer.")
+                quit()
+            if guess_1 > number:
+                print("Too high! Guess again:")
+            if guess_1 < number:
+                print("Too low! Guess again:")
+    if difficulty == "1":
+        for guess in range(1, 10):
+            guess_1 = float(input(f"Enter guess {guess}:"))
+            if guess_1 == number:
+                time_beat_end = time.perf_counter()
+                time_beat = time_beat_end - time_beat_start
+                print(f"Congratulations, you are CORRECT! The number was {number}. It took you {guess} guesses and {time_beat:.2f} seconds to enter the correct answer.")
+                quit()
+            if guess_1 > number:
+                print("Too high! Guess again:")
+            if guess_1 < number:
+                print("Too low! Guess again:")
+    last_guess = float(input("Enter your last guess:"))
+    if difficulty == "1":
+        guess = 10
+    if difficulty == "2":
+        guess = 5
+    if difficulty == "3":
+        guess = 3
+    if last_guess == number:
+        time_beat_end = time.perf_counter()
+        time_beat = time_beat_end - time_beat_start
+        print(f"Congratulations, you are CORRECT! The number was {number}.  It took you {guess} chances and {time_beat:.2f} seconds to enter the correct answer.")
+    if last_guess > number:
+        print("Too high! YOU LOST")
+    if last_guess < number:
+        print(f"Too low! YOU LOST! The number was {number}")
+    game = input("Would you like to play again? (Y/N)")
+    if game == "N":
+        print("Goodbye!")
